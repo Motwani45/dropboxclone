@@ -1,4 +1,4 @@
-import 'package:dropboxclone/core/pages/home_page.dart';
+import 'package:dropboxclone/feature/presentation/pages/auth/home_page.dart';
 import 'package:dropboxclone/core/utils/loading/loading_screen.dart';
 import 'package:dropboxclone/feature/bloc/auth/auth_cubit.dart';
 import 'package:dropboxclone/feature/bloc/auth/auth_state.dart';
