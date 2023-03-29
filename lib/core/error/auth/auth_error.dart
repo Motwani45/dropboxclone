@@ -5,7 +5,8 @@ const Map<String, AuthError> authorErrorMapping = {
   'EMAIL_NOT_FOUND': AuthErrorUserNotFound(),
   'INVALID_PASSWORD': AuthErrorInvalidPassword(),
   'EMAIL_EXISTS': AuthErrorEmailAlreadyInUse(),
-  'requires-recent-login': AuthErrorRequiresRecentLogin(),
+  'SESSION_EXPIRES': AuthErrorRequiresRecentLogin(),
+  'INVALID_EMAIL':AuthErrorInvalidEmail()
 };
 
 @immutable
@@ -20,14 +21,13 @@ abstract class AuthError {
 
   factory AuthError.from(AuthException exception) {
     return authorErrorMapping[exception.code.trim()] ??
-        AuthErrorUnknown(exception);
+        AuthErrorUnknown();
   }
 }
 
 @immutable
 class AuthErrorUnknown extends AuthError {
-  final AuthException innerException;
-  const AuthErrorUnknown(this.innerException)
+  const AuthErrorUnknown()
       : super(
       dialogTitle: 'Authentication Error',
       dialogText: 'Unknown Authentication Error');
@@ -40,7 +40,7 @@ class AuthErrorRequiresRecentLogin extends AuthError {
       : super(
       dialogTitle: 'Requires Recent Login',
       dialogText:
-      'You need to log out and log back in again in order to perform this operation');
+      'Your Session Completed! Please Log in again');
 }
 
 
@@ -68,4 +68,8 @@ class AuthErrorEmailAlreadyInUse extends AuthError {
 class AuthErrorInvalidPassword extends AuthError{
   const AuthErrorInvalidPassword():super(dialogText: "You have entered a wrong password",
   dialogTitle: "Invalid Password");
+}@immutable
+class AuthErrorInvalidEmail extends AuthError{
+  const AuthErrorInvalidEmail():super(dialogText: "You have entered a wrong email",
+  dialogTitle: "Invalid Email");
 }

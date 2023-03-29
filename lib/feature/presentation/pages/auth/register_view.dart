@@ -1,5 +1,5 @@
-import 'package:dropboxclone/feature/presentation/bloc/auth/auth_bloc.dart';
-import 'package:dropboxclone/feature/presentation/bloc/auth/auth_event.dart';
+
+import 'package:dropboxclone/feature/bloc/auth/auth_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -37,12 +37,12 @@ class RegisterView extends StatelessWidget {
             TextButton(onPressed: () {
               final email=emailController.text;
               final password=passwordController.text;
-              context.read<AuthBloc>().add(AuthEventRegister(emailAddress: email, password: password));
+              context.read<AuthCubit>().signUp(email,password);
 
             }, child: const Text("Register")),
             TextButton(
                 onPressed: () {
-                  context.read<AuthBloc>().add(AuthEventGotToLogin());
+                  context.read<AuthCubit>().goToLogin();
                 },
                 child: const Text("Already have account? Login")),
           ],

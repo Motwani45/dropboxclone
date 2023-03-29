@@ -17,7 +17,9 @@ abstract class AuthState {
 
 @immutable
 class AuthStateLoggedIn extends AuthState{
+  final String? userId;
   const AuthStateLoggedIn({
+    this.userId,
     required super.isLoading,
     required super.authError,
   });

@@ -1,6 +1,5 @@
 
-import 'package:dropboxclone/feature/presentation/bloc/auth/auth_bloc.dart';
-import 'package:dropboxclone/feature/presentation/bloc/auth/auth_event.dart';
+import 'package:dropboxclone/feature/bloc/auth/auth_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -38,12 +37,12 @@ class LoginView extends StatelessWidget {
             TextButton(onPressed: () {
               final email=emailController.text;
               final password=passwordController.text;
-              context.read<AuthBloc>().add(AuthEventLogIn(emailAddress: email,password: password));
+              context.read<AuthCubit>().signIn(email,password);
 
             }, child: const Text("Log In")),
             TextButton(
                 onPressed: () {
-                  context.read<AuthBloc>().add(AuthEventGotToRegistration());
+                  context.read<AuthCubit>().goToRegistration();
                 },
                 child: const Text("Dont have account? Register")),
           ],
