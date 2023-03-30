@@ -1,4 +1,5 @@
-import 'package:dropboxclone/feature/presentation/pages/auth/home_page.dart';
+import 'package:dropboxclone/feature/bloc/file_management/file_cubit.dart';
+import 'package:dropboxclone/feature/presentation/pages/file_management/home_page.dart';
 import 'package:dropboxclone/core/utils/loading/loading_screen.dart';
 import 'package:dropboxclone/feature/bloc/auth/auth_cubit.dart';
 import 'package:dropboxclone/feature/bloc/auth/auth_state.dart';
@@ -14,9 +15,12 @@ class App extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return BlocProvider<AuthCubit>(
-      create: (_) => AuthCubit(
-      )..goToLogin(),
+    return MultiBlocProvider(providers: [BlocProvider<AuthCubit>(
+    create: (_) => AuthCubit(
+    )..goToLogin(),),
+    BlocProvider<FileCubit>(create: (_){
+      return FileCubit()..getFiles();
+    })],
       child: MaterialApp(
         title: 'DropBox Clone',
         theme: ThemeData(
@@ -28,7 +32,7 @@ class App extends StatelessWidget {
           } else if (state is AuthStateIsInRegistrationView) {
             return RegisterView();
           } else if (state is AuthStateLoggedIn) {
-            return const HomePage();
+            return HomePage(userId: state.userId!,);
           } else {
             return Container();
           }

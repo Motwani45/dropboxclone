@@ -38,7 +38,7 @@ void signIn(String emailAddress,String password) async{
     emit(AuthStateLoggedOut(isLoading: false, authError: authError!));
   }
   else{
-    emit(const AuthStateLoggedIn(isLoading: false, authError: null));
+    emit(AuthStateLoggedIn(userId:authEntity!.userId,isLoading: false, authError: null));
   }
 }
 
