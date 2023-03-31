@@ -1,0 +1,46 @@
+{
+  "project_info": {
+    "project_number": "670772144827",
+    "project_id": "dropboxclone-7258c",
+    "storage_bucket": "dropboxclone-7258c.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:670772144827:android:2a1f4b2b1d32a33bdf579e",
+        "android_client_info": {
+          "package_name": "com.example.dropboxclone"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "670772144827-8l61tu2lhrfrdjgjrll9onku3umkoshj.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAi5ADFDMnhWmigoHHaV_suLC0pcaOhJcM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "670772144827-8l61tu2lhrfrdjgjrll9onku3umkoshj.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "670772144827-va09dlaujasrvj3ac2ob4pfa3q62c9td.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.dropboxclone"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

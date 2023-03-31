@@ -1,4 +1,4 @@
-import 'package:dropboxclone/feature/bloc/file_management/file_cubit.dart';
+import 'package:dropboxclone/feature/bloc/file_management/local/local_cubit.dart';
 import 'package:dropboxclone/feature/presentation/pages/file_management/home_page.dart';
 import 'package:dropboxclone/core/utils/loading/loading_screen.dart';
 import 'package:dropboxclone/feature/bloc/auth/auth_cubit.dart';
@@ -18,8 +18,8 @@ class App extends StatelessWidget {
     return MultiBlocProvider(providers: [BlocProvider<AuthCubit>(
     create: (_) => AuthCubit(
     )..goToLogin(),),
-    BlocProvider<FileCubit>(create: (_){
-      return FileCubit()..getFiles();
+    BlocProvider<LocalCubit>(create: (_){
+      return LocalCubit()..getFiles();
     })],
       child: MaterialApp(
         title: 'DropBox Clone',

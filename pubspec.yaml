@@ -43,6 +43,8 @@ dependencies:
   path: ^1.8.2
   sqflite: ^2.2.6
   connectivity_plus: ^3.0.3
+  firebase_storage: ^11.1.0
+  internet_connection_checker: ^1.0.0+1
 
 dev_dependencies:
   flutter_test:

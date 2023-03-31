@@ -3,11 +3,11 @@ import 'dart:io';
 import 'package:dropboxclone/core/enums/file_enum.dart';
 import 'package:dropboxclone/core/extension/filesize.dart';
 import 'package:dropboxclone/feature/data/models/file_management/file_model.dart';
-import 'package:dropboxclone/feature/domain/entity/file_management/file_entity.dart';
+import 'package:dropboxclone/feature/domain/entity/file_management/local/file_entity.dart';
 import 'package:path/path.dart' as p;
 import 'package:path_provider/path_provider.dart';
 import 'package:sqflite/sqflite.dart';
-import '../../../../domain/entity/file_management/file_list_entity.dart';
+import '../../../domain/entity/file_management/local/file_list_entity.dart';
 
 class DatabaseHelper{
   static Database? _db;
