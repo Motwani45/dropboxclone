@@ -19,12 +19,15 @@ RemoteFileEntity? fileEntity;
 resultType.fold((l) => null, (r) => fileEntity=r);
 File file =File(fileEntity!.filePath);
 UploadTask uploadTask=fileEntity!.reference.putFile(file);
-  double percentage=(uploadTask.snapshot.bytesTransferred/uploadTask.snapshot.totalBytes)*100;
+uploadTask.snapshotEvents.listen((event) {
+  double percentage=(event.bytesTransferred/event.totalBytes)*100;
   if(percentage==100){
     emit(RemoteStateUploadCompleted());
+    return;
 }
   else{
     emit(RemoteStateUploadInProgress(percentage));
   }
+});
 }
 }
