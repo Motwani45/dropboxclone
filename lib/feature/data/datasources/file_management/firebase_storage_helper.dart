@@ -12,7 +12,6 @@ class FirebaseStorageHelper{
   final FirebaseStorage firebaseStorage=FirebaseStorage.instance;
   Future<Either<FileManagementError,RemoteFileEntity>> startUpload({required String userId,required String fileName,required String filePath}) async{
     try {
-      File file =File(filePath);
       Reference reference= firebaseStorage.ref().child("$userId/$fileName");
       return Either<FileManagementError, RemoteFileEntity>.right(
           RemoteFileModel(filePath: filePath,

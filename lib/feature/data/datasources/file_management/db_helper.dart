@@ -73,4 +73,8 @@ class DatabaseHelper{
     Database database =await db;
     return database.delete("Files");
   }
+  void changeSyncStatus(String fileName,String syncStatus) async{
+    Database database =await db;
+    await database.rawUpdate('UPDATE Files SET syncStatus = ? WHERE fileName = ?',[syncStatus,fileName]);
+  }
 }

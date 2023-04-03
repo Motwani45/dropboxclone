@@ -7,14 +7,14 @@ abstract class LocalState{
 
   const LocalState({
     required this.isLoading,
-    required this.files
+    required this.files,
   });
 }
 class LocalStateInitialState extends LocalState{
-  const LocalStateInitialState({required super.files,required super.isLoading});
+  const LocalStateInitialState({required super.files,required super.isLoading,});
 }
 class LocalStateGetFiles extends LocalState{
-  const LocalStateGetFiles({required super.files,required super.isLoading});
+  const LocalStateGetFiles({required super.files,required super.isLoading,});
 }
 
 

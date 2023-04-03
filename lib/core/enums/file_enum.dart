@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 
 enum FileEnum{
-  NotUploaded("Not Uploaded",Colors.grey,Icon(Icons.not_interested)),
-  UploadInProgress("Upload In Progress",Colors.yellow,Icon(Icons.timelapse)),
-  UploadComplete("Upload Complete",Colors.green,Icon(Icons.emoji_events_sharp)),
-  UploadFailed("Upload Failed",Colors.red,Icon(Icons.emoji_flags));
+  NotUploaded("NotUploaded",Colors.grey,Icon(Icons.not_interested)),
+  UploadInProgress("UploadInProgress",Colors.yellow,Icon(Icons.timelapse)),
+  UploadComplete("UploadComplete",Colors.green,Icon(Icons.emoji_events_sharp)),
+  UploadFailed("UploadFailed",Colors.red,Icon(Icons.emoji_flags));
 
   final String message;
   final Color colorData;

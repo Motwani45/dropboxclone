@@ -2,13 +2,13 @@ import 'package:dropboxclone/core/enums/file_enum.dart';
 
 extension FileEnumExtension on String{
   FileEnum getFileEnum(){
-    if(this=="Not Uploaded"){
+    if(this=="NotUploaded"){
       return FileEnum.NotUploaded;
     }
-    if(this=="Upload In Progress"){
+    if(this=="UploadInProgress"){
       return FileEnum.UploadInProgress;
     }
-    if(this=="Upload Complete"){
+    if(this=="UploadComplete"){
       return FileEnum.UploadComplete;
     }
     return FileEnum.UploadFailed;

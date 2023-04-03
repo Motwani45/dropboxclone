@@ -1,3 +1,4 @@
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 abstract class RemoteState {
@@ -10,7 +11,11 @@ class RemoteStateUploadCompleted extends RemoteState{
 
 class RemoteStateUploadInProgress extends RemoteState{
   final double percentage;
-  RemoteStateUploadInProgress(this.percentage);
+  final String fileName;
+  RemoteStateUploadInProgress({
+    required this.percentage,
+    required this.fileName
+});
 }
 
 class RemoteStateFileUploadFailed extends RemoteState{

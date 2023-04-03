@@ -20,4 +20,9 @@ class LocalRepositoryImpl extends LocalRepository{
   LocalRepositoryImpl({
     required this.dataSource,
   });
+
+  @override
+  void changeSyncStatus(String fileName, String syncStatus) {
+    dataSource.changeSyncStatus(fileName, syncStatus);
+  }
 }

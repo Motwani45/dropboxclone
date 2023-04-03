@@ -6,4 +6,5 @@ import 'package:dropboxclone/feature/domain/entity/file_management/local/file_li
 abstract class LocalDataSource{
   Future<FileEntity> addFile(String filePath);
   Future<FileListEntity> getFiles();
+  void changeSyncStatus(String fileName,String syncStatus);
 }

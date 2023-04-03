@@ -19,5 +19,10 @@ class LocalDataSourceImpl extends LocalDataSource{
   return await databaseHelper.getFiles();
   }
 
+  @override
+  void changeSyncStatus(String fileName, String syncStatus) async{
+    databaseHelper.changeSyncStatus(fileName, syncStatus);
+  }
+
 
 }
