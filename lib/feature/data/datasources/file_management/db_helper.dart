@@ -66,7 +66,7 @@ class DatabaseHelper{
       'fileName':p.basename(newFile.path),
       'fileSize':await newFile.getFileSize()
     };
-    database.insert("Files",values,conflictAlgorithm: ConflictAlgorithm.replace);
+    database.insert("Files",values,conflictAlgorithm: ConflictAlgorithm.abort);
     return FileModel(syncStatus: values['syncStatus']!, fileName: values['fileName']!, fileSize: values['fileSize']!, fileExtension: values['fileExtension']!, filePath: values['filePath']!);
   }
   Future<int> dbClear() async{

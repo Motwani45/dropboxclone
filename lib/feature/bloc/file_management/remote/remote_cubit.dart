@@ -9,7 +9,7 @@ import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class RemoteCubit extends Cubit<RemoteState>{
-  RemoteCubit():super(const RemoteStateUploadNotStarted());
+  RemoteCubit():super(const RemoteStateUploadNotStarted(fileName: ""));
   final StartUploadUsecase startUploadUsecase =StartUploadUsecase(remoteRepository: RemoteRepositoryImpl(dataSource: RemoteDataSourceImpl()));
 void startUpload({required String userId,required String fileName,required String filePath}) async{
 final resultType=await startUploadUsecase.call(userId: userId, fileName: fileName, filePath: filePath);
@@ -19,11 +19,14 @@ UploadTask task=fileEntity!.reference.putFile(File(filePath));
 task.snapshotEvents.listen((event) {
   double percentage=(event.bytesTransferred/event.totalBytes)*100;
   if(percentage==100){
-  emit(RemoteStateUploadCompleted());
+  emit(RemoteStateUploadCompleted(fileName: fileName));
   }
   else{
     emit(RemoteStateUploadInProgress(percentage: percentage, fileName: fileName));
   }
-});
+}).onError((error,stackTrace){
+  emit(RemoteStateFileUploadFailed(fileName: fileName));
+}
+);
 }
 }

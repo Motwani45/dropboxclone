@@ -15,14 +15,13 @@ class LocalCubit extends Cubit<LocalState>{
  final GetFilesUsecase getFilesUsecase=GetFilesUsecase(LocalRepositoryImpl(dataSource: LocalDataSourceImpl()));
 
  void addFile() async{
-  FilePickerResult? filePickerResult=await FilePicker.platform.pickFiles();
+  FilePickerResult? filePickerResult=await FilePicker.platform.pickFiles(allowMultiple: true);
   if(filePickerResult==null){
    print("HERE1");
    emit(LocalStateGetFiles(files: state.files, isLoading: false));
    return;
   }
   print("HERE2");
-  emit(LocalStateGetFiles(files: state.files, isLoading: true));
   String filePath=filePickerResult.files.first.path!;
   await addFileUsecase.call(filePath);
   getFiles();

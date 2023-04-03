@@ -12,19 +12,25 @@ import '../../../bloc/file_management/remote/remote_state.dart';
 
 class FileListTile extends StatelessWidget {
   final FileEntity file;
-  final bool hasInternet;
   final String userId;
-  final bool canUpload;
+  final VoidCallback changeUploadInProgress;
+  final bool uploadInProgress;
 
   FileListTile(
-      {required this.file, required this.userId, required this.hasInternet,required this.canUpload, Key? key})
+      {required this.file,
+      required this.userId,
+      required this.changeUploadInProgress,
+      required this.uploadInProgress,
+      Key? key})
       : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Padding(
       padding: EdgeInsets.symmetric(
-          vertical: 5.0, horizontal: 10.0,),
+        vertical: 5.0,
+        horizontal: 10.0,
+      ),
       child: ClipRRect(
         borderRadius: BorderRadius.circular(10),
         child: Container(
@@ -33,48 +39,60 @@ class FileListTile extends StatelessWidget {
           child: Row(
             children: <Widget>[
               Container(
-                color: file.syncStatus
-                    .getFileEnum()
-                    .colorData,
+                color: file.syncStatus.getFileEnum().colorData,
                 width: 70,
                 height: 70,
-                child: file.syncStatus
-                    .getFileEnum()
-                    .iconData,
+                child: file.syncStatus.getFileEnum().iconData,
               ),
               SizedBox(width: 5),
               Expanded(
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
-                  crossAxisAlignment:
-                  CrossAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: <Widget>[
-                    Text(file.fileName.length>20?"${file.fileName.substring(0,19)}...":file.fileName),
-                    Text(file.fileSize,
-                        style: TextStyle(color: Colors.grey))
+                    Text(file.fileName.length > 20
+                        ? "${file.fileName.substring(0, 19)}..."
+                        : file.fileName),
+                    Text(file.fileSize, style: TextStyle(color: Colors.grey))
                   ],
                 ),
               ),
-              BlocBuilder<RemoteCubit,RemoteState>(builder:(context,state){
-                if(state is RemoteStateUploadInProgress &&state.fileName==file.fileName) {
-                  print("Here percentage");
-                  return Column(
-                    children: [
-                      Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: CircularProgressIndicator(value: state.percentage/100,),
-                      ),
-                      Text(state.percentage.toStringAsFixed(1)),
-                    ],
-                  );
-                }
-                if(state is RemoteStateUploadCompleted){
-                  print("Here complete");
-                  context.read<LocalCubit>().changeSyncStatus(file.fileName,FileEnum.UploadComplete.message);
-                  context.read<LocalCubit>().getFiles();
-                }
-                return Container();
-              })
+              if (uploadInProgress)
+                BlocBuilder<RemoteCubit, RemoteState>(
+                    builder: (builderContext, state) {
+                  if (state is RemoteStateUploadInProgress &&
+                      state.fileName == file.fileName) {
+                    print("Here percentage");
+                    return Column(
+                      children: [
+                        Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: CircularProgressIndicator(
+                            value: state.percentage / 100,
+                          ),
+                        ),
+                        Text(state.percentage.toStringAsFixed(1)),
+                      ],
+                    );
+                  }
+                  if (state is RemoteStateUploadCompleted &&
+                      state.fileName == file.fileName) {
+                    print("Here complete");
+                    changeUploadInProgress();
+                    context.read<LocalCubit>().changeSyncStatus(
+                        file.fileName, FileEnum.UploadComplete.message);
+                    context.read<LocalCubit>().getFiles();
+                  }
+                  if (state is RemoteStateFileUploadFailed &&
+                      state.fileName == file.fileName) {
+                    context.read<LocalCubit>().changeSyncStatus(
+                        file.fileName, FileEnum.UploadFailed.message);
+                    context.read<LocalCubit>().getFiles();
+                  }
+                  return Container();
+                })
+              else
+                  Container()
             ],
           ),
         ),
