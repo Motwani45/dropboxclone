@@ -13,12 +13,13 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 class HomePage extends StatelessWidget {
   final String userId;
   HomePage({Key? key,required this.userId}) : super(key: key);
-  bool internetAvailable=false;
+  static bool internetAvailable=false;
   static Queue<FileEntity> queue=Queue();
   static bool uploadInProgress=false;
   void changeUploadProgress(){
     uploadInProgress=false;
   }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -26,13 +27,14 @@ class HomePage extends StatelessWidget {
           title: const Text("DropBox Clone"),
         ),
         body: BlocListener<InternetCubit,InternetState>(
-          listener: (context,state){
+          listener: (listenerContext,state){
             if(state is InternetStateOnConnected){
               internetAvailable=true;
             }
             else if(state is InternetStateNotConnected){
               internetAvailable=false;
             }
+              context.read<LocalCubit>().getFiles();
           },
           child: BlocBuilder<LocalCubit,LocalState>(
             builder: (builderContext,state){
@@ -57,6 +59,7 @@ class HomePage extends StatelessWidget {
                   FileEntity fileEntity=state.files[index];
                   return FileListTile(file: fileEntity,
                     userId: userId,
+                    isInternetAvailable: internetAvailable,
                     uploadInProgress: uploadInProgress,
                     changeUploadInProgress: changeUploadProgress,
 

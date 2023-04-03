@@ -15,12 +15,14 @@ class FileListTile extends StatelessWidget {
   final String userId;
   final VoidCallback changeUploadInProgress;
   final bool uploadInProgress;
+  final bool isInternetAvailable;
 
   FileListTile(
       {required this.file,
       required this.userId,
       required this.changeUploadInProgress,
       required this.uploadInProgress,
+        required this.isInternetAvailable,
       Key? key})
       : super(key: key);
 
@@ -57,7 +59,7 @@ class FileListTile extends StatelessWidget {
                   ],
                 ),
               ),
-              if (uploadInProgress)
+              if (uploadInProgress&&isInternetAvailable)
                 BlocBuilder<RemoteCubit, RemoteState>(
                     builder: (builderContext, state) {
                   if (state is RemoteStateUploadInProgress &&
