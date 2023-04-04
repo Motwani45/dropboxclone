@@ -72,7 +72,7 @@ class HomePage extends StatelessWidget {
         ),
         floatingActionButton: FloatingActionButton(
           onPressed: () {
-            context.read<LocalCubit>().addFile();
+            context.read<LocalCubit>().addFile(context);
           },
           child: const Icon(Icons.add),
         ),

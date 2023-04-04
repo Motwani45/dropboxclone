@@ -5,7 +5,9 @@ import 'package:dropboxclone/feature/domain/entity/file_management/local/file_li
 import 'package:dropboxclone/feature/domain/usecase/file_management/local/add_file_usecase.dart';
 import 'package:dropboxclone/feature/domain/usecase/file_management/local/change_syncstatus_usecase.dart';
 import 'package:dropboxclone/feature/domain/usecase/file_management/local/get_files_usecase.dart';
+import 'package:dropboxclone/feature/presentation/widgets/error_dialog/duplicate_error_dialog.dart';
 import 'package:file_picker/file_picker.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class LocalCubit extends Cubit<LocalState>{
@@ -15,7 +17,7 @@ class LocalCubit extends Cubit<LocalState>{
  final GetFilesUsecase getFilesUsecase=GetFilesUsecase(LocalRepositoryImpl(dataSource: LocalDataSourceImpl()));
  final ChangeSyncStatusUsecase changeSyncStatusUsecase=ChangeSyncStatusUsecase(localRepository: LocalRepositoryImpl(dataSource: LocalDataSourceImpl()));
 
- void addFile() async{
+ void addFile(BuildContext context) async{
   FilePickerResult? filePickerResult=await FilePicker.platform.pickFiles(allowMultiple: true);
   if(filePickerResult==null){
    print("HERE1");
@@ -24,8 +26,8 @@ class LocalCubit extends Cubit<LocalState>{
   }
   print("HERE2");
   String filePath=filePickerResult.files.first.path!;
-  await addFileUsecase.call(filePath);
-  getFiles();
+  final resultType=await addFileUsecase.call(filePath);
+  resultType.fold((l) => showDuplicateErrorDialog(context, l), (r) => getFiles());
  }
 
  void getFiles() async{

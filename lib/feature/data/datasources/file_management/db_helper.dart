@@ -1,9 +1,11 @@
 import 'dart:io';
 
 import 'package:dropboxclone/core/enums/file_enum.dart';
+import 'package:dropboxclone/core/error/file_management/file_management_error.dart';
 import 'package:dropboxclone/core/extension/filesize.dart';
 import 'package:dropboxclone/feature/data/models/file_management/file_model.dart';
 import 'package:dropboxclone/feature/domain/entity/file_management/local/file_entity.dart';
+import 'package:fpdart/fpdart.dart';
 import 'package:path/path.dart' as p;
 import 'package:path_provider/path_provider.dart';
 import 'package:sqflite/sqflite.dart';
@@ -51,7 +53,7 @@ class DatabaseHelper{
 
   }
 
-  Future<FileEntity> addFile(String filePath) async{
+  Future<Either<FileManagementError,FileEntity>> addFile(String filePath) async{
     File file=File(filePath);
     final bytes=await file.readAsBytes();
     Directory documentsDirectory = await getApplicationDocumentsDirectory();
@@ -66,8 +68,13 @@ class DatabaseHelper{
       'fileName':p.basename(newFile.path),
       'fileSize':await newFile.getFileSize()
     };
-    database.insert("Files",values,conflictAlgorithm: ConflictAlgorithm.abort);
-    return FileModel(syncStatus: values['syncStatus']!, fileName: values['fileName']!, fileSize: values['fileSize']!, fileExtension: values['fileExtension']!, filePath: values['filePath']!);
+    int res=await database.insert("Files",values,conflictAlgorithm: ConflictAlgorithm.abort);
+    if(res==0){
+      return Either<FileManagementError,FileEntity>.left(FileManagementError(
+        message: "File Already There"
+      ));
+    }
+    return Either<FileManagementError,FileEntity>.right(FileModel(syncStatus: values['syncStatus']!, fileName: values['fileName']!, fileSize: values['fileSize']!, fileExtension: values['fileExtension']!, filePath: values['filePath']!));
   }
   Future<int> dbClear() async{
     Database database =await db;
