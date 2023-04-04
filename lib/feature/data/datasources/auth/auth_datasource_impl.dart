@@ -16,11 +16,6 @@ class AuthDataSourceImpl implements AuthDataSource {
   String? _userId;
 
   @override
-  Future<String> getCurrentUserId() async {
-    return _userId!;
-  }
-
-  @override
   Future<bool> isValidToken() async {
     final prefs = await SharedPreferences.getInstance();
     if (!prefs.containsKey('userData')) {
@@ -48,11 +43,6 @@ class AuthDataSourceImpl implements AuthDataSource {
     return await authenticate(user.emailAddress, user.password, 'signUp');
   }
 
-  @override
-  Future<void> signOut() {
-    // TODO: implement signOut
-    throw UnimplementedError();
-  }
 
   Future<Either<AuthError, AuthEntity>> authenticate(
       String email, String password, String segment) async {
@@ -70,9 +60,7 @@ class AuthDataSourceImpl implements AuthDataSource {
         ),
       );
       final responseData = json.decode(response.body);
-      print(responseData);
       if (responseData['error'] != null) {
-        print("Error Code: ${responseData['error']['message']}");
         return Either<AuthError, AuthEntity>.left(
             AuthError.from(AuthException(responseData['error']['message'])));
       }

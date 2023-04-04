@@ -9,10 +9,6 @@ class AuthRepositoryImpl implements AuthRepository{
   const AuthRepositoryImpl({
     required this.authDataSource,
   });
-  @override
-  Future<String> getCurrentUserId()async{
-    return await authDataSource.getCurrentUserId();
-  }
 
   @override
   Future<bool> isValidToken() async{
@@ -22,10 +18,6 @@ class AuthRepositoryImpl implements AuthRepository{
   @override
   Future<Either<AuthError, AuthEntity>> signIn(AuthEntity user) async{
     return await authDataSource.signIn(user);
-  }
-
-  @override
-  Future<void> signOut() async{
   }
 
   @override

@@ -81,11 +81,12 @@ class FileListTile extends StatelessWidget {
                       Padding(
                         padding: const EdgeInsets.all(8.0),
                         child: CircularProgressIndicator(
+                          backgroundColor: Colors.white,
                           value: state.percentage / 100,
                           color: Colors.yellow.shade600,
                         ),
                       ),
-                      Text(state.percentage.toStringAsFixed(1)),
+                      Text("${state.percentage.toStringAsFixed(1)}%"),
                     ],
                   );
                 }

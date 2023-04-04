@@ -6,6 +6,4 @@ abstract class AuthDataSource{
   Future<bool> isValidToken();
   Future<Either<AuthError,AuthEntity>> signIn(AuthEntity user);
   Future<Either<AuthError,AuthEntity>> signUp(AuthEntity user);
-  Future<void> signOut();
-  Future<String> getCurrentUserId();
 }
