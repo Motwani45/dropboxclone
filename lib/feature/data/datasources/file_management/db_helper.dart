@@ -68,9 +68,12 @@ class DatabaseHelper{
       'fileName':p.basename(newFile.path),
       'fileSize':await newFile.getFileSize()
     };
-    int res=await database.insert("Files",values,conflictAlgorithm: ConflictAlgorithm.abort);
-    if(res==0){
-      return Either<FileManagementError,FileEntity>.left(FileManagementError(
+    try {
+      await database.insert(
+          "Files", values, conflictAlgorithm: ConflictAlgorithm.abort);
+    }
+    catch (e){
+      return Either<FileManagementError,FileEntity>.left(const FileManagementError(
         message: "File Already There"
       ));
     }
