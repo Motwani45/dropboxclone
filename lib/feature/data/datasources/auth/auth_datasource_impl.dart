@@ -33,16 +33,16 @@ class AuthDataSourceImpl implements AuthDataSource {
   }
 
   @override
-  Future<Either<AuthError, AuthEntity>> signIn(AuthEntity user) async {
-    return await authenticate(
-        user.emailAddress, user.password, "signInWithPassword");
+  Future<Either<AuthError, AuthEntity>> signIn(
+      String emailAddress, String password) async {
+    return await authenticate(emailAddress, password, "signInWithPassword");
   }
 
   @override
-  Future<Either<AuthError, AuthEntity>> signUp(AuthEntity user) async {
-    return await authenticate(user.emailAddress, user.password, 'signUp');
+  Future<Either<AuthError, AuthEntity>> signUp(
+      String emailAddress, String password) async {
+    return await authenticate(emailAddress, password, 'signUp');
   }
-
 
   Future<Either<AuthError, AuthEntity>> authenticate(
       String email, String password, String segment) async {

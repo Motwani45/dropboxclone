@@ -1,4 +1,3 @@
-import 'package:dropboxclone/core/enums/file_enum.dart';
 import 'package:dropboxclone/feature/domain/entity/file_management/local/file_entity.dart';
 
 class FileModel extends FileEntity{

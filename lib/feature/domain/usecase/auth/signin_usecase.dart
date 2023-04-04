@@ -6,8 +6,11 @@ import '../../../../core/error/auth/auth_error.dart';
 
 class SignInUsecase{
   final AuthRepository authRepository;
+
   const SignInUsecase(this.authRepository);
-  Future<Either<AuthError,AuthEntity>> call(AuthEntity entity)async{
-    return await authRepository.signIn(entity);
+
+  Future<Either<AuthError, AuthEntity>> call(
+      String emailAddress, String password) async {
+    return await authRepository.signIn(emailAddress, password);
   }
 }

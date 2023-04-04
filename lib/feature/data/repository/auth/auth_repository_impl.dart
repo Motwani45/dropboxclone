@@ -16,13 +16,14 @@ class AuthRepositoryImpl implements AuthRepository{
   }
 
   @override
-  Future<Either<AuthError, AuthEntity>> signIn(AuthEntity user) async{
-    return await authDataSource.signIn(user);
+  Future<Either<AuthError, AuthEntity>> signIn(
+      String emailAddress, String password) async {
+    return await authDataSource.signIn(emailAddress, password);
   }
 
   @override
-  Future<Either<AuthError, AuthEntity>> signUp(AuthEntity user) async{
-return await authDataSource.signUp(user);
+  Future<Either<AuthError, AuthEntity>> signUp(
+      String emailAddress, String password) async {
+    return await authDataSource.signUp(emailAddress, password);
   }
-
 }

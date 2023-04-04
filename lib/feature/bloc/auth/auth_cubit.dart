@@ -25,38 +25,35 @@ final SignUpUsecase signUpUsecase=SignUpUsecase(
 
 void signIn(String emailAddress,String password) async{
   emit(const AuthStateLoggedOut(isLoading: true, authError: null));
-  final AuthEntity entity=AuthEntity(token: null, expiryDate: null, userId: null, emailAddress: emailAddress, password: password);
-  final resultType=await signInUsecase.call(entity);
-  AuthError? authError;
-  AuthEntity? authEntity;
-  resultType.fold((l){
-    authError=l;
-  }, (r) {
-    authEntity=r;
-  });
-  if(authError!=null){
-    emit(AuthStateLoggedOut(isLoading: false, authError: authError!));
-  }
-  else{
+    final resultType = await signInUsecase.call(emailAddress, password);
+    AuthError? authError;
+    AuthEntity? authEntity;
+    resultType.fold((l) {
+      authError = l;
+    }, (r) {
+      authEntity = r;
+    });
+    if (authError != null) {
+      emit(AuthStateLoggedOut(isLoading: false, authError: authError!));
+    } else{
     emit(AuthStateLoggedIn(userId:authEntity!.userId,isLoading: false, authError: null));
   }
 }
 
 void signUp(String emailAddress,String password) async{
   emit(AuthStateIsInRegistrationView(isLoading: true, authError: null));
-  final AuthEntity entity=AuthEntity(token: null, expiryDate: null, userId: null, emailAddress:emailAddress, password: password);
-  final resultType=await signUpUsecase.call(entity);
-  AuthError? authError;
-  AuthEntity? authEntity;
-  resultType.fold((l){
-    authError=l;
-  }, (r) {
-    authEntity=r;
-  });
-  if(authError!=null){
-    emit(AuthStateIsInRegistrationView(isLoading: false, authError: authError!));
-  }
-  else{
+    final resultType = await signUpUsecase.call(emailAddress, password);
+    AuthError? authError;
+    AuthEntity? authEntity;
+    resultType.fold((l) {
+      authError = l;
+    }, (r) {
+      authEntity = r;
+    });
+    if (authError != null) {
+      emit(AuthStateIsInRegistrationView(
+          isLoading: false, authError: authError!));
+    } else{
     emit(AuthStateLoggedIn(userId:authEntity!.userId,isLoading: false, authError: null));
   }
 }
