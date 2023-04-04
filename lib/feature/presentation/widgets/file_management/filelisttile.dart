@@ -2,7 +2,6 @@ import 'package:dropboxclone/core/extension/fileenumextension.dart';
 import 'package:dropboxclone/feature/bloc/file_management/local/local_cubit.dart';
 import 'package:dropboxclone/feature/bloc/file_management/remote/remote_cubit.dart';
 import 'package:dropboxclone/feature/domain/entity/file_management/local/file_entity.dart';
-import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -29,7 +28,7 @@ class FileListTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: EdgeInsets.symmetric(
+      padding: const EdgeInsets.symmetric(
         vertical: 5.0,
         horizontal: 10.0,
       ),
@@ -55,7 +54,7 @@ class FileListTile extends StatelessWidget {
                     Text(file.fileName.length > 20
                         ? "${file.fileName.substring(0, 19)}..."
                         : file.fileName),
-                    Text(file.fileSize, style: TextStyle(color: Colors.grey))
+                    Text(file.fileSize,style: TextStyle(color: Colors.grey))
                   ],
                 ),
               ),
