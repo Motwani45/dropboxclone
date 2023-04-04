@@ -72,8 +72,7 @@ class HomePage extends StatelessWidget {
         ),
         floatingActionButton: FloatingActionButton(
           onPressed: () {
-            // DatabaseHelper().dbClear();
-            context.read<LocalCubit>().addFile();
+            context.read<LocalCubit>().addFile(context);
           },
           child: const Icon(Icons.add),
         ),

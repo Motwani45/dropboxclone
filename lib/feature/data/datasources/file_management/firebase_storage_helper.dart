@@ -19,7 +19,7 @@ class FirebaseStorageHelper{
           ));
     }
     catch(e){
-      return Either.left(FileManagementError());
+      return Either.left(FileManagementError(message: "Unknown Error"));
     }
 
   }
