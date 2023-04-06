@@ -68,7 +68,7 @@ class AuthDataSourceImpl implements AuthDataSource {
       _userId = responseData['localId'];
       _expiryDate = DateTime.now()
           .add(Duration(seconds: int.parse(responseData['expiresIn'])));
-      print("User Authenticate");
+
       final prefs = await SharedPreferences.getInstance();
       final userData = json.encode({
         'token': _token,
@@ -77,7 +77,7 @@ class AuthDataSourceImpl implements AuthDataSource {
       });
       prefs.setString('userData', userData);
     } catch (error) {
-      return Either<AuthError, AuthEntity>.left(AuthErrorUnknown());
+      return Either<AuthError, AuthEntity>.left(const AuthErrorUnknown());
     }
     return Either<AuthError, AuthEntity>.of(AuthModel(
         token: _token,

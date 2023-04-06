@@ -4,14 +4,14 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:internet_connection_checker/internet_connection_checker.dart';
 
 class InternetCubit extends Cubit<InternetState>{
-  InternetCubit():super(InternetStateInitialState()){
+  InternetCubit():super(const InternetStateInitialState()){
     Connectivity().onConnectivityChanged.listen((event) async{
       var internetConnection=await InternetConnectionChecker().hasConnection;
       if(internetConnection){
-        emit(InternetStateOnConnected());
+        emit(const InternetStateOnConnected());
       }
       else{
-        emit(InternetStateNotConnected());
+        emit(const InternetStateNotConnected());
       }
     });
   }
@@ -19,10 +19,10 @@ class InternetCubit extends Cubit<InternetState>{
   void getInitialState() async{
     var internetConnection=await InternetConnectionChecker().hasConnection;
     if(internetConnection){
-      emit(InternetStateOnConnected());
+      emit(const InternetStateOnConnected());
     }
     else{
-      emit(InternetStateNotConnected());
+      emit(const InternetStateNotConnected());
     }
   }
 

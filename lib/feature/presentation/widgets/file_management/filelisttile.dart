@@ -17,7 +17,7 @@ class FileListTile extends StatelessWidget {
   final bool uploadInProgress;
   final bool isInternetAvailable;
 
-  FileListTile(
+  const FileListTile(
       {required this.file,
       required this.userId,
       required this.changeUploadInProgress,
@@ -66,7 +66,8 @@ class FileListTile extends StatelessWidget {
                   Text(file.fileName.length > 20
                       ? "${file.fileName.substring(0, 19)}..."
                       : file.fileName),
-                  Text(file.fileSize, style: TextStyle(color: Colors.grey))
+                  Text(file.fileSize,
+                      style: const TextStyle(color: Colors.grey))
                 ],
               ),
             ),
@@ -75,7 +76,6 @@ class FileListTile extends StatelessWidget {
                   builder: (builderContext, state) {
                 if (state is RemoteStateUploadInProgress &&
                     state.fileName == file.fileName) {
-                  print("Here percentage");
                   return Column(
                     children: [
                       Padding(
@@ -92,7 +92,6 @@ class FileListTile extends StatelessWidget {
                 }
                 if (state is RemoteStateUploadCompleted &&
                     state.fileName == file.fileName) {
-                  print("Here complete");
                   changeUploadInProgress();
                   context.read<LocalCubit>().changeSyncStatus(
                       file.fileName, FileEnum.UploadComplete.message);

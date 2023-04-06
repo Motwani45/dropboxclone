@@ -21,7 +21,7 @@ abstract class AuthError {
 
   factory AuthError.from(AuthException exception) {
     return authorErrorMapping[exception.code.trim()] ??
-        AuthErrorUnknown();
+        const AuthErrorUnknown();
   }
 }
 

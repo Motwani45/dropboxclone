@@ -2,7 +2,8 @@ import 'package:dropboxclone/core/error/file_management/file_management_error.da
 import 'package:dropboxclone/feature/data/datasources/file_management/firebase_storage_helper.dart';
 import 'package:dropboxclone/feature/data/datasources/file_management/remote/remote_datasource.dart';
 import 'package:dropboxclone/feature/domain/entity/file_management/remote/remote_file_entity.dart';
-import 'package:fpdart/src/either.dart';
+import 'package:fpdart/fpdart.dart';
+
 
 class RemoteDataSourceImpl extends RemoteDataSource{
   final FirebaseStorageHelper firebaseStorageHelper=FirebaseStorageHelper();

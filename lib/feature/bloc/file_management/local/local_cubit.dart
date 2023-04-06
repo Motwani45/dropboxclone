@@ -20,11 +20,10 @@ class LocalCubit extends Cubit<LocalState>{
  void addFile(BuildContext context) async{
   FilePickerResult? filePickerResult=await FilePicker.platform.pickFiles();
   if(filePickerResult==null){
-   print("HERE1");
    emit(LocalStateGetFiles(files: state.files, isLoading: false));
    return;
   }
-  print("HERE2");
+ emit(LocalStateGetFiles(files: state.files, isLoading: true));
   String filePath=filePickerResult.files.first.path!;
   final resultType=await addFileUsecase.call(filePath);
   resultType.fold((l) => showDuplicateErrorDialog(context, l), (r) => getFiles());
@@ -33,7 +32,7 @@ class LocalCubit extends Cubit<LocalState>{
  void getFiles() async{
   FileListEntity listEntity= await getFilesUsecase.call();
   if(listEntity.isEmpty){
-   emit(LocalStateInitialState(files: [], isLoading: false));
+   emit(const LocalStateInitialState(files: [], isLoading: false));
   }
   else{
    emit(LocalStateGetFiles(files: listEntity, isLoading: false));

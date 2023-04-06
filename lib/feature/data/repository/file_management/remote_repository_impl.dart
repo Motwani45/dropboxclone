@@ -2,7 +2,7 @@ import 'package:dropboxclone/core/error/file_management/file_management_error.da
 import 'package:dropboxclone/feature/data/datasources/file_management/remote/remote_datasource.dart';
 import 'package:dropboxclone/feature/domain/entity/file_management/remote/remote_file_entity.dart';
 import 'package:dropboxclone/feature/domain/repository/file_management/remote_repository.dart';
-import 'package:fpdart/src/either.dart';
+import 'package:fpdart/fpdart.dart';
 
 class RemoteRepositoryImpl extends RemoteRepository{
   final RemoteDataSource dataSource;

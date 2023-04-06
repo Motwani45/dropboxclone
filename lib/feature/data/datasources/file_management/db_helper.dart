@@ -39,14 +39,14 @@ class DatabaseHelper{
     // When creating the db, create the table
     await db.execute(
         "CREATE TABLE Files(fileName TEXT PRIMARY KEY, filePath TEXT, fileSize TEXT, syncStatus TEXT,  fileExtension TEXT)");
-    print("Created tables");
+
   }
 
   Future<FileListEntity> getFiles() async{
     String query="SELECT * FROM Files";
     Database database=await db;
     final files=await database.rawQuery(query);
-    print("File Data : $files");
+
     if(files.isEmpty){
       return [];
     }
