@@ -4,8 +4,10 @@ import 'package:fpdart/fpdart.dart';
 
 abstract class AuthDataSource{
   Future<bool> isValidToken();
-  Future<Either<AuthError,AuthEntity>> signIn(AuthEntity user);
-  Future<Either<AuthError,AuthEntity>> signUp(AuthEntity user);
-  Future<void> signOut();
-  Future<String> getCurrentUserId();
+
+  Future<Either<AuthError, AuthEntity>> signIn(
+      String emailAddress, String password);
+
+  Future<Either<AuthError, AuthEntity>> signUp(
+      String emailAddress, String password);
 }

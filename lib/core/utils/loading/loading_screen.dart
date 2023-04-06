@@ -1,10 +1,11 @@
 import 'dart:async';
+
 import 'package:dropboxclone/core/utils/loading/loading_screen_controller.dart';
 import 'package:flutter/material.dart';
 
 class LoadingScreen {
   LoadingScreen._sharedInstance();
-  static late final LoadingScreen _shared = LoadingScreen._sharedInstance();
+  static final LoadingScreen _shared = LoadingScreen._sharedInstance();
   factory LoadingScreen.instance() => _shared;
 
   LoadingScreenController? controller;

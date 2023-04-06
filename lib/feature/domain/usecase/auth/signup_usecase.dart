@@ -5,8 +5,11 @@ import 'package:fpdart/fpdart.dart';
 
 class SignUpUsecase{
   final AuthRepository authRepository;
+
   const SignUpUsecase(this.authRepository);
-  Future<Either<AuthError,AuthEntity>> call(AuthEntity entity)async{
-    return await authRepository.signUp(entity);
+
+  Future<Either<AuthError, AuthEntity>> call(
+      String emailAddress, String password) async {
+    return await authRepository.signUp(emailAddress, password);
   }
 }

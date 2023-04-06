@@ -1,6 +1,4 @@
 import 'package:dropboxclone/core/error/auth/auth_error.dart';
-import 'package:equatable/equatable.dart';
-
 import 'package:flutter/foundation.dart' show immutable;
 
 
@@ -40,5 +38,6 @@ class AuthStateLoggedOut extends AuthState {
 
 @immutable
 class AuthStateIsInRegistrationView extends AuthState{
-  AuthStateIsInRegistrationView({required super.isLoading, required super.authError});
+  const AuthStateIsInRegistrationView(
+      {required super.isLoading, required super.authError});
 }

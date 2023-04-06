@@ -18,7 +18,7 @@ class LocalCubit extends Cubit<LocalState>{
  final ChangeSyncStatusUsecase changeSyncStatusUsecase=ChangeSyncStatusUsecase(localRepository: LocalRepositoryImpl(dataSource: LocalDataSourceImpl()));
 
  void addFile(BuildContext context) async{
-  FilePickerResult? filePickerResult=await FilePicker.platform.pickFiles(allowMultiple: true);
+  FilePickerResult? filePickerResult=await FilePicker.platform.pickFiles();
   if(filePickerResult==null){
    print("HERE1");
    emit(LocalStateGetFiles(files: state.files, isLoading: false));

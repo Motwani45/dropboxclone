@@ -1,12 +1,12 @@
-import 'package:dropboxclone/feature/bloc/file_management/internet_connection/internet_cubit.dart';
-import 'package:dropboxclone/feature/bloc/file_management/local/local_cubit.dart';
-import 'package:dropboxclone/feature/bloc/file_management/remote/remote_cubit.dart';
-import 'package:dropboxclone/feature/presentation/pages/file_management/home_page.dart';
 import 'package:dropboxclone/core/utils/loading/loading_screen.dart';
 import 'package:dropboxclone/feature/bloc/auth/auth_cubit.dart';
 import 'package:dropboxclone/feature/bloc/auth/auth_state.dart';
+import 'package:dropboxclone/feature/bloc/file_management/internet_connection/internet_cubit.dart';
+import 'package:dropboxclone/feature/bloc/file_management/local/local_cubit.dart';
+import 'package:dropboxclone/feature/bloc/file_management/remote/remote_cubit.dart';
 import 'package:dropboxclone/feature/presentation/pages/auth/login_view.dart';
 import 'package:dropboxclone/feature/presentation/pages/auth/register_view.dart';
+import 'package:dropboxclone/feature/presentation/pages/file_management/home_page.dart';
 import 'package:dropboxclone/feature/presentation/widgets/error_dialog/auth_error_dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';

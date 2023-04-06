@@ -1,5 +1,3 @@
-import 'dart:io';
-
 import 'package:dropboxclone/core/error/file_management/file_management_error.dart';
 import 'package:dropboxclone/feature/data/datasources/file_management/db_helper.dart';
 import 'package:dropboxclone/feature/data/models/file_management/remote_file_model.dart';
@@ -19,7 +17,7 @@ class FirebaseStorageHelper{
           ));
     }
     catch(e){
-      return Either.left(FileManagementError(message: "Unknown Error"));
+      return Either.left(const FileManagementError(message: "Unknown Error"));
     }
 
   }

@@ -16,11 +16,6 @@ class AuthDataSourceImpl implements AuthDataSource {
   String? _userId;
 
   @override
-  Future<String> getCurrentUserId() async {
-    return _userId!;
-  }
-
-  @override
   Future<bool> isValidToken() async {
     final prefs = await SharedPreferences.getInstance();
     if (!prefs.containsKey('userData')) {
@@ -38,20 +33,15 @@ class AuthDataSourceImpl implements AuthDataSource {
   }
 
   @override
-  Future<Either<AuthError, AuthEntity>> signIn(AuthEntity user) async {
-    return await authenticate(
-        user.emailAddress, user.password, "signInWithPassword");
+  Future<Either<AuthError, AuthEntity>> signIn(
+      String emailAddress, String password) async {
+    return await authenticate(emailAddress, password, "signInWithPassword");
   }
 
   @override
-  Future<Either<AuthError, AuthEntity>> signUp(AuthEntity user) async {
-    return await authenticate(user.emailAddress, user.password, 'signUp');
-  }
-
-  @override
-  Future<void> signOut() {
-    // TODO: implement signOut
-    throw UnimplementedError();
+  Future<Either<AuthError, AuthEntity>> signUp(
+      String emailAddress, String password) async {
+    return await authenticate(emailAddress, password, 'signUp');
   }
 
   Future<Either<AuthError, AuthEntity>> authenticate(
@@ -70,9 +60,7 @@ class AuthDataSourceImpl implements AuthDataSource {
         ),
       );
       final responseData = json.decode(response.body);
-      print(responseData);
       if (responseData['error'] != null) {
-        print("Error Code: ${responseData['error']['message']}");
         return Either<AuthError, AuthEntity>.left(
             AuthError.from(AuthException(responseData['error']['message'])));
       }

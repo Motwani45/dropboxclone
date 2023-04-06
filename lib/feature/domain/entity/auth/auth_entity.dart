@@ -1,14 +1,9 @@
-import 'package:equatable/equatable.dart';
-
-class AuthEntity extends Equatable{
+class AuthEntity {
   final String? token;
   final DateTime? expiryDate;
   final String? userId;
   final String emailAddress;
   final String password;
-
-  @override
-  List<Object?> get props => [token,expiryDate,userId,emailAddress,password];
 
   const AuthEntity({
     required this.token,
