@@ -4,6 +4,7 @@ import 'dart:math';
 extension FileSize on File{
   Future<String> getFileSize() async{
     int bytes=await length();
+    // when length of file exceeds the range of int and give NAN error
     if(bytes==0){
       bytes=1;
     }

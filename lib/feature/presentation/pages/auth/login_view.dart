@@ -43,7 +43,7 @@ class LoginView extends StatelessWidget {
                 onPressed: () {
                   context.read<AuthCubit>().goToRegistration();
                 },
-                child: const Text("Dont have account? Register")),
+                child: const Text("Don't have account? Register")),
           ],
         ),
       ),
