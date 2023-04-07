@@ -54,7 +54,7 @@ class DatabaseHelper{
 
   }
 
-  Future<Either<FileManagementError,FileEntity>> addFile(String filePath) async{
+  Future<Either<FileManagementError,FileEntity>> addFile(String filePath,int fileBytes) async{
     File file=File(filePath);
     final bytes=await file.readAsBytes();
     Directory documentsDirectory = await getApplicationDocumentsDirectory();
@@ -67,7 +67,7 @@ class DatabaseHelper{
       'syncStatus':FileEnum.NotUploaded.message,
       'fileExtension':p.extension(newFile.path),
       'fileName':p.basename(newFile.path),
-      'fileSize':await newFile.getFileSize()
+      'fileSize':fileBytes.getFileSize()
     };
     try {
       await database.insert(

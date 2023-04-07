@@ -15,8 +15,8 @@ class LocalDataSourceImpl extends LocalDataSource{
 
   @override
   Future<Either<FileManagementError, FileEntity>> addFile(
-      String filePath) async {
-    return await databaseHelper.addFile(filePath);
+      String filePath,int fileBytes) async {
+    return await databaseHelper.addFile(filePath,fileBytes);
   }
 
   @override

@@ -29,7 +29,8 @@ class LocalCubit extends Cubit<LocalState>{
   }
  emit(LocalStateGetFiles(files: state.files, isLoading: true));
   String filePath=filePickerResult.files.first.path!;
-  final resultType=await addFileUsecase.call(filePath);
+  int fileBytes=filePickerResult.files.first.size;
+  final resultType=await addFileUsecase.call(filePath,fileBytes);
   resultType.fold((l) => showDuplicateErrorDialog(context, l), (r) => getFiles());
  }
 

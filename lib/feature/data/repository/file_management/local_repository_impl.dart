@@ -8,8 +8,8 @@ import 'package:fpdart/fpdart.dart';
 class LocalRepositoryImpl extends LocalRepository{
   LocalDataSource dataSource;
   @override
-  Future<Either<FileManagementError,FileEntity>> addFile(String filePath) {
- return dataSource.addFile(filePath);
+  Future<Either<FileManagementError,FileEntity>> addFile(String filePath,int fileBytes) {
+ return dataSource.addFile(filePath,fileBytes);
   }
 
   @override

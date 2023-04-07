@@ -4,7 +4,7 @@ import 'package:dropboxclone/feature/domain/entity/file_management/local/file_li
 import 'package:fpdart/fpdart.dart';
 
 abstract class LocalDataSource{
-  Future<Either<FileManagementError,FileEntity>> addFile(String filePath);
+  Future<Either<FileManagementError,FileEntity>> addFile(String filePath,int fileBytes);
   Future<FileListEntity> getFiles();
   void changeSyncStatus(String fileName,String syncStatus);
 }

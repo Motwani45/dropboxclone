@@ -7,7 +7,7 @@ import '../../../../../core/error/file_management/file_management_error.dart';
 class AddFileUsecase{
   final LocalRepository localRepository;
   const AddFileUsecase(this.localRepository);
-  Future<Either<FileManagementError,FileEntity>> call(String filePath){
-    return localRepository.addFile(filePath);
+  Future<Either<FileManagementError,FileEntity>> call(String filePath,int fileBytes){
+    return localRepository.addFile(filePath,fileBytes);
   }
 }

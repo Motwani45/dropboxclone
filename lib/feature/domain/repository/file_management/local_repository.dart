@@ -3,7 +3,7 @@ import 'package:dropboxclone/feature/domain/entity/file_management/local/file_en
 import 'package:dropboxclone/feature/domain/entity/file_management/local/file_list_entity.dart';
 import 'package:fpdart/fpdart.dart';
 abstract class LocalRepository{
-  Future<Either<FileManagementError,FileEntity>> addFile(String filePath);
+  Future<Either<FileManagementError,FileEntity>> addFile(String filePath,int fileBytes);
   Future<FileListEntity> getFiles();
   void changeSyncStatus(String fileName,String syncStatus);
 }
