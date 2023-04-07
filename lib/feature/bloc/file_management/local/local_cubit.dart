@@ -1,6 +1,4 @@
 import 'package:dropboxclone/feature/bloc/file_management/local/local_state.dart';
-import 'package:dropboxclone/feature/data/datasources/file_management/local/local_datasource_impl.dart';
-import 'package:dropboxclone/feature/data/repository/file_management/local_repository_impl.dart';
 import 'package:dropboxclone/feature/domain/entity/file_management/local/file_list_entity.dart';
 import 'package:dropboxclone/feature/domain/usecase/file_management/local/add_file_usecase.dart';
 import 'package:dropboxclone/feature/domain/usecase/file_management/local/change_syncstatus_usecase.dart';
@@ -38,7 +36,7 @@ class LocalCubit extends Cubit<LocalState>{
  void getFiles() async{
   FileListEntity listEntity= await getFilesUsecase.call();
   if(listEntity.isEmpty){
-   emit(const LocalStateInitialState(files: [], isLoading: false));
+   emit(const LocalStateGetFiles(files: [], isLoading: false));
   }
   else{
    emit(LocalStateGetFiles(files: listEntity, isLoading: false));

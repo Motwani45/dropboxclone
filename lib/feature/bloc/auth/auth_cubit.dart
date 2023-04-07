@@ -39,7 +39,8 @@ void goToLogin(){
 }
 void goToRegistration(){
   emit(
-        const AuthStateIsInRegistrationView(isLoading: false, authError: null));
+      const AuthStateIsInRegistrationView(isLoading: false, authError: null),
+    );
   }
 
 }

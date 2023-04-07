@@ -22,7 +22,7 @@ class App extends StatelessWidget {
     return MultiBlocProvider(
       providers: [
         BlocProvider<AuthCubit>(
-          create: (_) => sl<AuthCubit>()..goToLogin(),
+          create: (_) => sl<AuthCubit>(),
         ),
         BlocProvider<LocalCubit>(create: (_) {
           return sl<LocalCubit>()..getFiles();
