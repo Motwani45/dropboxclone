@@ -11,11 +11,17 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class LocalCubit extends Cubit<LocalState>{
- LocalCubit():super(const LocalStateInitialState(files:[], isLoading: false));
- final AddFileUsecase addFileUsecase=AddFileUsecase(LocalRepositoryImpl(
-     dataSource: LocalDataSourceImpl()));
- final GetFilesUsecase getFilesUsecase=GetFilesUsecase(LocalRepositoryImpl(dataSource: LocalDataSourceImpl()));
- final ChangeSyncStatusUsecase changeSyncStatusUsecase=ChangeSyncStatusUsecase(localRepository: LocalRepositoryImpl(dataSource: LocalDataSourceImpl()));
+ final AddFileUsecase addFileUsecase;
+ final GetFilesUsecase getFilesUsecase;
+ final ChangeSyncStatusUsecase changeSyncStatusUsecase;
+
+ LocalCubit(
+ {
+  required this.changeSyncStatusUsecase,
+  required this.getFilesUsecase,
+  required this.addFileUsecase
+}
+     ):super(const LocalStateInitialState(files:[], isLoading: false));
 
  void addFile(BuildContext context) async{
   FilePickerResult? filePickerResult=await FilePicker.platform.pickFiles();

@@ -1,5 +1,4 @@
 import 'dart:convert';
-
 import 'package:dropboxclone/core/constants/web_apikey.dart';
 import 'package:dropboxclone/core/error/auth/auth_error.dart';
 import 'package:dropboxclone/core/error/auth/auth_exception.dart';
@@ -11,13 +10,16 @@ import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
 
 class AuthDataSourceImpl implements AuthDataSource {
+  final SharedPreferences prefs;
+  AuthDataSourceImpl({
+    required this.prefs,
+});
   String? _token;
   DateTime? _expiryDate;
   String? _userId;
 
   @override
   Future<bool> isValidToken() async {
-    final prefs = await SharedPreferences.getInstance();
     if (!prefs.containsKey('userData')) {
       return false;
     }
@@ -69,7 +71,6 @@ class AuthDataSourceImpl implements AuthDataSource {
       _expiryDate = DateTime.now()
           .add(Duration(seconds: int.parse(responseData['expiresIn'])));
 
-      final prefs = await SharedPreferences.getInstance();
       final userData = json.encode({
         'token': _token,
         'userId': _userId,

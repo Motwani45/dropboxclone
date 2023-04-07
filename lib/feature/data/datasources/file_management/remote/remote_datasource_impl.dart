@@ -6,7 +6,12 @@ import 'package:fpdart/fpdart.dart';
 
 
 class RemoteDataSourceImpl extends RemoteDataSource{
-  final FirebaseStorageHelper firebaseStorageHelper=FirebaseStorageHelper();
+  final FirebaseStorageHelper firebaseStorageHelper;
+  RemoteDataSourceImpl(
+  {
+    required this.firebaseStorageHelper
+}
+      );
   @override
   Future<Either<FileManagementError, RemoteFileEntity>> startUpload({ required String userId,required String fileName, required String filePath}) {
     return firebaseStorageHelper.startUpload(userId: userId, fileName: fileName, filePath: filePath);

@@ -11,6 +11,8 @@ import 'package:dropboxclone/feature/presentation/widgets/error_dialog/auth_erro
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../../../injection_container.dart';
+
 class App extends StatelessWidget {
   const App({super.key});
 
@@ -20,16 +22,16 @@ class App extends StatelessWidget {
     return MultiBlocProvider(
       providers: [
         BlocProvider<AuthCubit>(
-          create: (_) => AuthCubit()..goToLogin(),
+          create: (_) => sl<AuthCubit>()..goToLogin(),
         ),
         BlocProvider<LocalCubit>(create: (_) {
-          return LocalCubit()..getFiles();
+          return sl<LocalCubit>()..getFiles();
         }),
         BlocProvider<InternetCubit>(create: (_){
           return InternetCubit()..getInitialState();
         }),
         BlocProvider<RemoteCubit>(create: (_){
-          return RemoteCubit();
+          return sl<RemoteCubit>();
         })
       ],
       child: MaterialApp(

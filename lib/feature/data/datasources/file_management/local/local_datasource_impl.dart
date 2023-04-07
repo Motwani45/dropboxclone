@@ -7,15 +7,21 @@ import 'package:dropboxclone/feature/domain/entity/file_management/local/file_li
 import 'package:fpdart/fpdart.dart';
 
 class LocalDataSourceImpl extends LocalDataSource{
-  final databaseHelper= DatabaseHelper();
+  final DatabaseHelper databaseHelper;
+
+  LocalDataSourceImpl({
+    required this.databaseHelper,
+  });
+
   @override
-  Future<Either<FileManagementError,FileEntity>> addFile(String filePath) async{
-  return await databaseHelper.addFile(filePath);
+  Future<Either<FileManagementError, FileEntity>> addFile(
+      String filePath) async {
+    return await databaseHelper.addFile(filePath);
   }
 
   @override
-  Future<FileListEntity> getFiles() async{
-  return await databaseHelper.getFiles();
+  Future<FileListEntity> getFiles() async {
+    return await databaseHelper.getFiles();
   }
 
   @override
