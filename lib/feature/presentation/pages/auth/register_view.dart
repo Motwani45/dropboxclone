@@ -18,33 +18,35 @@ class RegisterView extends StatelessWidget {
       ),
       body: Padding(
         padding: const EdgeInsets.all(8.0),
-        child: Column(
-          children: [
-            TextField(
-              controller: emailController,
-              decoration:
-              const InputDecoration(hintText: "Enter your email here..."),
-              keyboardType: TextInputType.emailAddress,
-              keyboardAppearance: Brightness.dark,
-            ),
-            TextField(
-              controller: passwordController,
-              decoration: const InputDecoration(
-                  hintText: "Enter your password here..."),
-              obscureText: true,
-            ),
-            TextButton(onPressed: () {
-              final email=emailController.text;
-              final password=passwordController.text;
-              context.read<AuthCubit>().signUp(email,password);
+        child: SingleChildScrollView(
+          child: Column(
+            children: [
+              TextField(
+                controller: emailController,
+                decoration:
+                const InputDecoration(hintText: "Enter your email here..."),
+                keyboardType: TextInputType.emailAddress,
+                keyboardAppearance: Brightness.dark,
+              ),
+              TextField(
+                controller: passwordController,
+                decoration: const InputDecoration(
+                    hintText: "Enter your password here..."),
+                obscureText: true,
+              ),
+              TextButton(onPressed: () {
+                final email=emailController.text;
+                final password=passwordController.text;
+                context.read<AuthCubit>().signUp(email,password);
 
-            }, child: const Text("Register")),
-            TextButton(
-                onPressed: () {
-                  context.read<AuthCubit>().goToLogin();
-                },
-                child: const Text("Already have account? Login")),
-          ],
+              }, child: const Text("Register")),
+              TextButton(
+                  onPressed: () {
+                    context.read<AuthCubit>().goToLogin();
+                  },
+                  child: const Text("Already have account? Login")),
+            ],
+          ),
         ),
       ),
     );

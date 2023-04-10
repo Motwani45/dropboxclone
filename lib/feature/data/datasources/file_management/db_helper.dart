@@ -39,7 +39,6 @@ class DatabaseHelper{
     // When creating the db, create the table
     await db.execute(
         "CREATE TABLE Files(fileName TEXT PRIMARY KEY, filePath TEXT, fileSize TEXT, syncStatus TEXT,  fileExtension TEXT)");
-
   }
 
   Future<FileListEntity> getFiles() async{
