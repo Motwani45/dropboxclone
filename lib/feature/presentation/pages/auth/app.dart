@@ -24,11 +24,11 @@ class App extends StatelessWidget {
         BlocProvider<AuthCubit>(
           create: (_) => sl<AuthCubit>(),
         ),
-        BlocProvider<LocalCubit>(create: (_) {
-          return sl<LocalCubit>()..getFiles();
-        }),
         BlocProvider<InternetCubit>(create: (_){
           return InternetCubit()..getInitialState();
+        }),
+        BlocProvider<LocalCubit>(create: (_) {
+          return sl<LocalCubit>()..getFiles();
         }),
         BlocProvider<RemoteCubit>(create: (_){
           return sl<RemoteCubit>();
